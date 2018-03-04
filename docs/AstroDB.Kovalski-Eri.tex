@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{graphicx,float,epsfig,rotating,euscript,amsmath,textcomp,amsfonts,amssymb,color,multirow}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{hyperref}
+\textheight 257mm \textwidth 17.5cm \hoffset= 0mm \voffset= 0cm
+\topmargin -20mm \oddsidemargin -5mm \evensidemargin -5mm
+
+\begin{document}
+\fontsize{14}{14}\selectfont
+\newpage
+
+{\center \LARGE {\bf Лабораторна робота №1} \\}
+{\center \large {\bf Знаходження апексу Сонця методом Ковальського-Ері} \\}
+
+\begin{center}\
+  Коваль Анатолій Володимирович \\
+\end{center}
+
+\section*{Теоретична частина}
+  \begin{equation}
+    \begin{cases}
+      x &= r\cos\alpha\cos\delta \\
+      y &= r\sin\alpha\cos\delta \\
+      z &= r\sin\delta \\
+    \end{cases}
+  \end{equation}
+
+  \begin{equation}
+    \begin{cases}
+      \tg\alpha &= \dfrac{x}{y} \\
+      \tg\delta &= \dfrac{z}{\sqrt{x^2+y^2}} \\
+    \end{cases}
+  \end{equation}
+
+  \begin{equation}
+    \begin{cases}
+      \mu_{\alpha}
+      = \dfrac{d\alpha}{dt}
+      &= \dfrac{\cos\alpha}{r\cos\delta}\dot{y} - \dfrac{\sin\alpha}{r\cos\delta}\dot{x} \\
+      \mu_{\delta}
+      = \dfrac{d\delta}{dt}
+      &= \dfrac{\cos\delta}{r}\dot{z}
+      - \dfrac{\sin\delta\cos\alpha}{r}\dot{x}
+      - \dfrac{\sin\delta\sin\alpha}{r}\dot{y}
+    \end{cases}
+  \end{equation}
+
+  В середньому $\Sigma\dot{x_i}=\Sigma\dot{y_i}=\Sigma\dot{z_i}=0$, для окремих зір $\dot{x_i}=\dot{y_i}=\dot{z_i}=0$, де $\mu_{\alpha} = \dfrac{d\alpha}{dt}$ та $\mu_{\delta} = \dfrac{d\delta}{dt}$.
+
+  \begin{equation}
+    \begin{cases}
+      \dot{x} &= \dot{x_1} - X\\
+      \dot{y} &= \dot{y_1} - Y\\
+      \dot{z} &= \dot{z_1} - Z\\
+    \end{cases},
+  \end{equation}
+
+  Де $(\dot{x_1}, \dot{y_1}, \dot{z_1})$ - перекулярний рух зорі, $(-X, -Y, -Z)$ - паралактичне зміщення від руху Сонця. Тепер можемо записати:
+
+  \begin{equation}
+    \begin{cases}
+      \mu_{\alpha}\cos\delta &= \dfrac{\sin\alpha}{r}X - \dfrac{\cos\delta}{r}Y\\
+      \mu_{\delta} &= \dfrac{\sin\delta\cos\alpha}{r}X + \dfrac{\sin\alpha\sin\delta}{r}Y - \dfrac{\cos\delta}{r}Z\\
+    \end{cases}
+  \end{equation}
+
+  Прийнявши більш пізні поправки:
+
+  \begin{equation}
+    \begin{cases}
+      kr\mu_{\alpha}\cos\delta &= \sin\alpha X - \cos\delta Y\\
+      kr\mu_{\delta} &= \sin\delta\cos\alpha X + \sin\alpha\sin\delta Y - \cos\delta Z\\
+    \end{cases}
+  \end{equation}
+
+  Знайдені $(X, Y, Z)$ методом найменьших квадратів перетворемо їх з метою отримання $(\alpha, \delta)$:
+  \begin{equation}
+    \begin{cases}
+      \tg\alpha &= \dfrac{Y}{X}\\
+      \tg\delta &= \dfrac{Z}{\sqrt{X^2+Y^2}}\\
+    \end{cases}
+  \end{equation}
+
+\section*{Практична частина}
+
+  Для реалізації розрахунків дані було завантажено з \href{http://cdsarc.u-strasbg.fr/viz-bin/Cat?target=http&cat=I\%2F146&}{I/146} - спостереження північної півкулі каталогу PPM та \href{http://cdsarc.u-strasbg.fr/viz-bin/Cat?target=http&cat=I\%2F193&}{I/193} - спостереження південної півкулі каталогу PPM.
+
+  Користуючись \texttt{python} та \texttt{numpy} реалізовано скрипти обробки та оброблено $378910$ об'єктів. За результатами розрахунків апекс Сонця знаходиться \texttt{(RA) $18^{\texttt{h}}$ $40^{\texttt{m}}$ $23.2 \pm 55.5^{\texttt{s}}$ (dec) $70.17 \pm 0.23^{\circ}$ N}. За сучасними розрахунками координати сонячного апексу \texttt{(RA) $18^{\texttt{h}}$ $03^{\texttt{m}}$ $50.2^{\texttt{s}}$ (dec) $30.00^{\circ}$ N}.
+
+\section*{Висновки}
+
+  Не зважаючи на малість похибки отриманий результат не збігається із вказаним вище \texttt{(RA) $18^{\texttt{h}}$ $03^{\texttt{m}}$ $50.2^{\texttt{s}}$ (dec) $30.00^{\circ}$ N}. Можливо додаткова фільтрація даних: відкидання записів із флагом \texttt{P}, відкидання швидких зір. Та наявність точного значення відстаней до зірок.
+
+\end{document}

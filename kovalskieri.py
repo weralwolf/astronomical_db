@@ -18,6 +18,7 @@ DATA_DIR = join(abspath('.'), 'data')
 # Parsing data
 ppm = FileParser(PPMRow)
 
+print("Computing solar apex using Kovalski-Eri method")
 datafile_north = join(DATA_DIR, 'I_146', 'ppm1.dat')
 print("Parsing north datafile: {}".format(datafile_north))
 ppm.append(datafile_north)
@@ -100,4 +101,4 @@ print('Solar apex is (RA) {0}h {1}m {2:2.3} +/- {5:2.3}s (dec) {6:2.4} +/- {8:2.
     *toHours(A), *toHours(ea),
     *toDescending(D), *toDescending(ed)
 ))
-print('Solar apex is (RA) 18h 03m 50.2s (dec) {:2.4}'.format(30 + 16.8 / 3600.))
+print('Solar apex is (RA) 18h 03m 50.2s (dec) {:2.4} N'.format(30 + 16.8 / 3600.))

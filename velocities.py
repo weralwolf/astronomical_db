@@ -20,6 +20,7 @@ DATA_DIR = join(abspath('.'), 'data')
 # Parsing data
 rdrow = FileParser(RDRow)
 
+print("Computing solar apex by radial velocities of stars")
 datafile = join(DATA_DIR, 'III-239', 'catalog.dat')
 print("Parsing datafile: {}".format(datafile))
 rdrow.append(datafile)
@@ -83,4 +84,4 @@ print('Solar apex is (RA) {0}h {1}m {2:2.3} +/- {5:2.3}s (dec) {6:2.4} +/- {8:2.
     *toHours(A), *toHours(ea),
     *toDescending(D), *toDescending(ed)
 ))
-print('Solar apex is (RA) 18h 03m 50.2s (dec) {:2.4}'.format(30 + 16.8 / 3600.))
+print('Solar apex is (RA) 18h 03m 50.2s (dec) {:2.4} N'.format(30 + 16.8 / 3600.))

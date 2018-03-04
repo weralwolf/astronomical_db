@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{graphicx,float,epsfig,rotating,euscript,amsmath,textcomp,amsfonts,amssymb,color,multirow}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{hyperref}
+\textheight 257mm \textwidth 17.5cm \hoffset= 0mm \voffset= 0cm
+\topmargin -20mm \oddsidemargin -5mm \evensidemargin -5mm
+
+\begin{document}
+\fontsize{14}{14}\selectfont
+\newpage
+
+{\center \LARGE {\bf Лабораторна робота №2} \\}
+{\center \large {\bf Знаходження апексу Сонця за променевими швидкостями зір} \\}
+
+\begin{center}\
+  Коваль Анатолій Володимирович \\
+\end{center}
+
+\section*{Теоретична частина}
+  Нехай $V_r^{'}$ - перекулярна швидкість зорі та $\gamma$ - кутова відстань зорі до апексу Сонця, тоді $V_r^{''}=-V_{\odot}\cos\gamma$ - параллактичний компонент швидкості зорі.
+
+  \begin{equation}
+    V_r = V_r^{'}-V_{\odot}\cos\gamma \Rightarrow V_r^{'} = V_r+V_{\odot}\cos\gamma
+  \end{equation}
+
+  Користуючись:
+
+  \begin{equation}
+    \begin{cases}
+      X &= V_{\odot}\cos D\cos A \\
+      Y &= V_{\odot}\cos D\sin A \\
+      Z &= V_{\odot}\sin D \\
+    \end{cases}
+  \end{equation}
+
+  та
+
+  \begin{equation}
+    \begin{cases}
+      \cos\gamma &= \sin\delta\sin D + \cos\delta\cos D\cos(\alpha - A) \\
+      \sin\gamma\cos\psi &= -\cos\delta\sin D + \sin\delta\cos D\cos(\alpha -A) \\
+      \sin\gamma\sin\phi &= \cos D\sin(\alpha - A) \\
+    \end{cases}
+  \end{equation}
+
+  Отримаємо:
+
+  \begin{equation}
+    V_{\odot}\cos\gamma = X\cos\alpha\cos\delta + Y\sin\alpha\cos\delta + Z\sin\delta
+  \end{equation}
+
+  Приймаючи, що для більшості зір $V_r^{'}\approx0$:
+
+  \begin{equation}
+    -V_r = X\cos\alpha\cos\delta + Y\sin\alpha\cos\delta + Z\sin\delta
+  \end{equation}
+
+  Знайдені $(X, Y, Z)$ методом найменьших квадратів перетворемо їх з метою отримання $(\alpha, \delta)$:
+  \begin{equation}
+    \begin{cases}
+      \tg\alpha = \dfrac{Y}{X}\\
+      \tg\delta = \dfrac{Z}{\sqrt{X^2+Y^2}}\\
+    \end{cases}
+  \end{equation}
+
+\section*{Практична частина}
+
+  Для реалізації розрахунків дані було завантажено з \href{http://cdsarc.u-strasbg.fr/viz-bin/Cat?target=http&cat=III\%2F239&}{III/239} - спостереження радіальних швидкостей зір.
+
+  Користуючись \texttt{python} та \texttt{numpy} реалізовано скрипти обробки та оброблено $34553$ об'єктів. За результатами розрахунків апекс Сонця знаходиться \texttt{(RA) $19^{\texttt{h}}$ $01^{\texttt{m}}$ $55.00 \pm 0.00^{\texttt{s}}$ (dec) $35.21 \pm 0.0007^{\circ}$ N}. За сучасними розрахунками координати сонячного апексу \texttt{(RA) $18^{\texttt{h}}$ $03^{\texttt{m}}$ $50.2^{\texttt{s}}$ (dec) $30.00^{\circ}$ N}.
+
+\section*{Висновки}
+
+  Не зважаючи на малість похибки отриманий результат не збігається із вказаним вище \texttt{(RA) $18^{\texttt{h}}$ $03^{\texttt{m}}$ $50.2^{\texttt{s}}$ (dec) $30.00^{\circ}$ N}. Проте здобута точність набагато вища порівняно з методом Ковальського-Ері. Можливе покращення точності можна досягнути додатковою фільтрацією зір за малістю перекулярного руху.
+
+\end{document}
